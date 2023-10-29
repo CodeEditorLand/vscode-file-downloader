@@ -1,63 +1,79 @@
 {
-    "name": "file-downloader",
-    "displayName": "File Downloader",
-    "description": "Exposes an API that allows other extensions to download files.",
-    "publisher": "mindaro-dev",
-    "license": "MIT",
-    "version": "1.0.13",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/microsoft/vscode-file-downloader.git"
-    },
-    "engines": {
-        "vscode": "1.66.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [],
-    "main": "./dist/extension",
-    "contributes": {
-        "commands": []
-    },
-    "scripts": {
-        "vscode:prepublish": "webpack --mode production",
-        "compile": "npm run webpack",
-        "lint": "eslint src --ext ts --fix",
-        "webpack": "webpack --mode development",
-        "webpack-dev": "webpack --mode development --watch",
-        "test": "npm run test-compile && node ./out/test/runTest.js",
-        "test-compile": "npm run compile && tsc -p ./"
-    },
-    "devDependencies": {
-        "@types/glob": "8.1.0",
-        "@types/mocha": "10.0.3",
-        "@types/node": "20.8.9",
-        "@types/rimraf": "3.0.2",
-        "@types/unzipper": "0.10.8",
-        "@types/uuid": "9.0.6",
-        "@types/vscode": "1.83.1",
-        "@typescript-eslint/eslint-plugin": "6.9.0",
-        "@typescript-eslint/parser": "6.9.0",
-        "eslint": "8.52.0",
-        "eslint-plugin-import": "2.29.0",
-        "eslint-plugin-jsdoc": "46.8.2",
-        "eslint-plugin-node": "11.1.0",
-        "eslint-plugin-prefer-arrow": "1.2.3",
-        "eslint-plugin-tslint": "3.1.0",
-        "glob": "10.3.10",
-        "license-checker-webpack-plugin": "0.2.1",
-        "mocha": "10.2.0",
-        "ts-loader": "9.5.0",
-        "typescript": "5.2.2",
-        "vscode-test": "1.0.0",
-        "webpack": "5.89.0",
-        "webpack-cli": "5.1.4"
-    },
-    "dependencies": {
-        "extract-zip": "2.0.1",
-        "axios": "1.6.0",
-        "rimraf": "5.0.5",
-        "uuid": "9.0.1"
-    }
+  "name": "file-downloader",
+  "displayName": "File Downloader",
+  "description": "Exposes an API that allows other extensions to download files.",
+  "publisher": "mindaro-dev",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "engines": {
+    "vscode": "1.66.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension",
+  "contributes": {
+    "commands": []
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "compile": "npm run webpack",
+    "lint": "eslint src --ext ts --fix",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test": "npm run test-compile && node ./out/test/runTest.js",
+    "test-compile": "npm run compile && tsc -p ./",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
+  },
+  "devDependencies": {
+    "@types/glob": "8.1.0",
+    "@types/mocha": "10.0.3",
+    "@types/node": "20.8.9",
+    "@types/rimraf": "3.0.2",
+    "@types/unzipper": "0.10.8",
+    "@types/uuid": "9.0.6",
+    "@types/vscode": "1.83.1",
+    "@typescript-eslint/eslint-plugin": "6.9.0",
+    "@typescript-eslint/parser": "6.9.0",
+    "eslint": "8.52.0",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-jsdoc": "46.8.2",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prefer-arrow": "1.2.3",
+    "eslint-plugin-tslint": "3.1.0",
+    "glob": "10.3.10",
+    "license-checker-webpack-plugin": "0.2.1",
+    "mocha": "10.2.0",
+    "ts-loader": "9.5.0",
+    "typescript": "5.2.2",
+    "vscode-test": "1.0.0",
+    "webpack": "5.89.0",
+    "webpack-cli": "5.1.4",
+    "typescript-esbuild": "0.3.1"
+  },
+  "dependencies": {
+    "extract-zip": "2.0.1",
+    "axios": "1.6.0",
+    "rimraf": "5.0.5",
+    "uuid": "9.0.1"
+  },
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
+  "type": "module",
+  "private": "false",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  }
 }
