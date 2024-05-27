@@ -1,31 +1,63 @@
 {
-	"name": "file-downloader",
-	"displayName": "File Downloader",
-	"description": "Exposes an API that allows other extensions to download files.",
-	"main": "./dist/extension",
-	"scripts": {
-		"compile": "npm run webpack",
-		"test-compile": "npm run compile && tsc -p ./",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch"
-	},
-	"contributes": {
-		"commands": []
-	},
-	"activationEvents": [],
-	"dependencies": {
-		"axios": "1.7.2",
-		"extract-zip": "2.0.1",
-		"rimraf": "5.0.7",
-		"uuid": "9.0.1"
-	},
-	"devDependencies": {
-		"@types/glob": "8.1.0",
-		"@types/node": "20.12.12",
-		"@types/rimraf": "3.0.2",
-		"@types/unzipper": "0.10.9",
-		"@types/uuid": "9.0.8",
-		"glob": "10.4.1",
-		"ts-loader": "9.5.1"
-	}
+    "name": "file-downloader",
+    "displayName": "File Downloader",
+    "description": "Exposes an API that allows other extensions to download files.",
+    "publisher": "mindaro-dev",
+    "license": "MIT",
+    "version": "1.0.13",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/microsoft/vscode-file-downloader.git"
+    },
+    "engines": {
+        "vscode": "^1.66.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "main": "./dist/extension",
+    "contributes": {
+        "commands": []
+    },
+    "scripts": {
+        "vscode:prepublish": "webpack --mode production",
+        "compile": "npm run webpack",
+        "lint": "eslint src --ext ts --fix",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch",
+        "test": "npm run test-compile && node ./out/test/runTest.js",
+        "test-compile": "npm run compile && tsc -p ./"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.0",
+        "@types/node": "^17.0.23",
+        "@types/rimraf": "^3.0.2",
+        "@types/unzipper": "^0.10.5",
+        "@types/uuid": "^8.3.4",
+        "@types/vscode": "^1.66.0",
+        "@typescript-eslint/eslint-plugin": "^5.17.0",
+        "@typescript-eslint/parser": "^5.17.0",
+        "@vscode/test-electron": "2.3.8",
+        "eslint": "^8.12.0",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-jsdoc": "^38.1.6",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prefer-arrow": "^1.2.3",
+        "eslint-plugin-tslint": "^3.1.0",
+        "glob": "^7.2.0",
+        "license-checker-webpack-plugin": "^0.2.1",
+        "mocha": "^9.2.2",
+        "ts-loader": "^9.2.8",
+        "typescript": "^4.6.3",
+        "webpack": "^5.71.0",
+        "webpack-cli": "^4.9.2"
+    },
+    "dependencies": {
+        "extract-zip": "^2.0.1",
+        "axios": "^0.26.1",
+        "rimraf": "^3.0.2",
+        "uuid": "^8.3.2"
+    }
 }
