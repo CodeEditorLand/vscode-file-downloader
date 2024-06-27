@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"@types/glob": "8.1.0",
-		"@types/node": "20.14.8",
+		"@types/node": "20.14.9",
 		"@types/rimraf": "3.0.2",
 		"@types/unzipper": "0.10.9",
 		"@types/uuid": "10.0.0",
