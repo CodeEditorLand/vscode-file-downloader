@@ -1,31 +1,31 @@
 {
-	"activationEvents": [],
-	"contributes": {
-		"commands": []
-	},
-	"dependencies": {
-		"axios": "^0.26.1",
-		"extract-zip": "^2.0.1",
-		"rimraf": "^3.0.2",
-		"uuid": "^8.3.2"
-	},
-	"description": "Exposes an API that allows other extensions to download files.",
-	"devDependencies": {
-		"@types/glob": "^7.2.0",
-		"@types/node": "^17.0.23",
-		"@types/rimraf": "^3.0.2",
-		"@types/unzipper": "^0.10.5",
-		"@types/uuid": "^8.3.4",
-		"glob": "^7.2.0",
-		"ts-loader": "^9.2.8"
-	},
-	"displayName": "File Downloader",
-	"main": "./dist/extension",
 	"name": "file-downloader",
+	"displayName": "File Downloader",
+	"description": "Exposes an API that allows other extensions to download files.",
+	"main": "./dist/extension",
 	"scripts": {
 		"compile": "npm run webpack",
 		"test-compile": "npm run compile && tsc -p ./",
 		"webpack": "webpack --mode development",
 		"webpack-dev": "webpack --mode development --watch"
+	},
+	"contributes": {
+		"commands": []
+	},
+	"activationEvents": [],
+	"dependencies": {
+		"axios": "1.7.4",
+		"extract-zip": "2.0.1",
+		"rimraf": "6.0.1",
+		"uuid": "10.0.0"
+	},
+	"devDependencies": {
+		"@types/glob": "8.1.0",
+		"@types/node": "22.4.0",
+		"@types/rimraf": "4.0.5",
+		"@types/unzipper": "0.10.10",
+		"@types/uuid": "10.0.0",
+		"glob": "11.0.0",
+		"ts-loader": "9.5.1"
 	}
 }
