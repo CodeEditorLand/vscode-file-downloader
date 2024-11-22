@@ -26,6 +26,7 @@ export class RetryUtility {
 			await new Promise((resolve): void => {
 				setTimeout(resolve, initialDelayInMs);
 			});
+
 			return this.exponentialRetryAsync(
 				requestFn,
 				operationName,

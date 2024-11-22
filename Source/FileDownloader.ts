@@ -22,7 +22,9 @@ import { RetryUtility } from "./utility/RetryUtility";
 import { pipelineAsync } from "./utility/Stream";
 
 const DefaultTimeoutInMs = 5000;
+
 const DefaultRetries = 5;
+
 const DefaultRetryDelayInMs = 100;
 
 export class FileDownloader implements IFileDownloader {
@@ -62,6 +64,7 @@ export class FileDownloader implements IFileDownloader {
 			repository,
 			fileName,
 		);
+
 		if (url === undefined) {
 			throw new Error(`Failed to get download link for ${fileName}.`);
 		}
@@ -79,6 +82,7 @@ export class FileDownloader implements IFileDownloader {
 		// If the GITHUB_TOKEN is set, then use it to download the file
 		// and then we wont get rate limited.
 		const token = process.env.GITHUB_TOKEN;
+
 		if (token != null) {
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			settings.headers.Authorization = `Bearer ${token}`;
@@ -120,7 +124,9 @@ export class FileDownloader implements IFileDownloader {
 			downloadsStoragePath,
 			uuid(),
 		);
+
 		const tempZipFileDownloadPath = `${tempFileDownloadPath}.zip`;
+
 		const fileDownloadPath: string = path.join(
 			downloadsStoragePath,
 			filename,
@@ -128,14 +134,22 @@ export class FileDownloader implements IFileDownloader {
 		await fs.promises.mkdir(downloadsStoragePath, { recursive: true });
 
 		const timeoutInMs = settings?.timeoutInMs ?? DefaultTimeoutInMs;
+
 		const retries = settings?.retries ?? DefaultRetries;
+
 		const retryDelayInMs =
 			settings?.retryDelayInMs ?? DefaultRetryDelayInMs;
+
 		const shouldUnzip = settings?.shouldUnzip ?? false;
+
 		const makeExecutable = settings?.makeExecutable ?? false;
+
 		const headers = settings?.headers;
+
 		let progress = 0;
+
 		let progressTimerId: any;
+
 		try {
 			progressTimerId = setInterval(() => {
 				if (progress <= 100) {
@@ -161,10 +175,12 @@ export class FileDownloader implements IFileDownloader {
 			const writeStream = fs.createWriteStream(
 				shouldUnzip ? tempZipFileDownloadPath : tempFileDownloadPath,
 			);
+
 			const pipelinePromise = pipelineAsync([
 				downloadStream,
 				writeStream,
 			]);
+
 			const writeStreamClosePromise = new Promise((resolve) =>
 				writeStream.on(`close`, resolve),
 			);
@@ -209,6 +225,7 @@ export class FileDownloader implements IFileDownloader {
 
 		if (cancellationToken?.isCancellationRequested ?? false) {
 			await rimrafAsync(tempFileDownloadPath);
+
 			throw new DownloadCanceledError();
 		}
 
@@ -238,6 +255,7 @@ export class FileDownloader implements IFileDownloader {
 					tempFileDownloadPath,
 					fileDownloadPath,
 				);
+
 				return Uri.file(fileDownloadPath);
 			};
 
@@ -262,9 +280,11 @@ export class FileDownloader implements IFileDownloader {
 	): Promise<Uri[]> {
 		const downloadsStoragePath =
 			FileDownloader.getDownloadsStoragePath(context);
+
 		try {
 			const filePaths: string[] =
 				await fs.promises.readdir(downloadsStoragePath);
+
 			return filePaths.map((filePath) =>
 				Uri.file(path.join(downloadsStoragePath, filePath)),
 			);
@@ -282,12 +302,15 @@ export class FileDownloader implements IFileDownloader {
 		context: ExtensionContext,
 	): Promise<Uri> {
 		const filePaths = await this.listDownloadedItems(context);
+
 		const matchingUris = filePaths.filter(
 			(uri) => uri.path.split(`/`).pop() === filename.replace(`/`, ``),
 		);
+
 		switch (matchingUris.length) {
 			case 1:
 				return matchingUris[0];
+
 			case 0:
 				throw new FileNotFoundError(
 					path.join(
@@ -295,6 +318,7 @@ export class FileDownloader implements IFileDownloader {
 						filename,
 					),
 				);
+
 			default:
 				throw new Error(
 					`Unexpectedly found too many files or directories. Paths found: ${filePaths.map((uri) => uri.toString())}`,
@@ -350,6 +374,7 @@ export class FileDownloader implements IFileDownloader {
 			const response: AxiosResponse<IGithubRelease> = await axios.get(
 				`https://api.github.com/repos/${owner}/${repository}/releases/latest`,
 			);
+
 			for (const asset of response.data.assets) {
 				if (asset.name === fileName) {
 					return Uri.parse(asset.url);
@@ -363,6 +388,7 @@ export class FileDownloader implements IFileDownloader {
 		}
 
 		this._logger.error(`${fileName} not found in latest release.`);
+
 		return undefined;
 	}
 }

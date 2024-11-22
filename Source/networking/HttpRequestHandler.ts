@@ -32,12 +32,15 @@ export default class HttpRequestHandler implements IHttpRequestHandler {
 				cancellationToken,
 				onDownloadProgressChange,
 			);
+
 		const errorHandlerFn = (error: Error) => {
 			const statusCode = (error as any)?.response?.status;
+
 			if (statusCode != null && 400 <= statusCode && statusCode < 500) {
 				throw error;
 			}
 		};
+
 		return RetryUtility.exponentialRetryAsync(
 			requestFn,
 			`HttpRequestHandler.get`,
@@ -66,6 +69,7 @@ export default class HttpRequestHandler implements IHttpRequestHandler {
 
 		if (cancellationToken != null) {
 			const cancelToken = axios.CancelToken;
+
 			const cancelTokenSource = cancelToken.source();
 			cancellationToken.onCancellationRequested(() =>
 				cancelTokenSource.cancel(),
@@ -74,8 +78,10 @@ export default class HttpRequestHandler implements IHttpRequestHandler {
 		}
 
 		let response: AxiosResponse<Readable> | undefined;
+
 		try {
 			response = await axios.get(url, options);
+
 			if (response === undefined) {
 				throw new Error(
 					`Undefined response received when downloading from '${url}'`,

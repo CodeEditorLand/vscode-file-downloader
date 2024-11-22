@@ -31,6 +31,7 @@ interface IAsset {
 	content_type: string;
 	state: string;
 	size: number;
+
 	download_count: number;
 	created_at: Date;
 	updated_at: Date;
