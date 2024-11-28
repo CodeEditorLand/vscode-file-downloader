@@ -10,6 +10,7 @@ type AnyStream =
 	| NodeJS.ReadWriteStream;
 
 export const finishedAsync = promisify(finished);
+
 export let pipelineAsync = promisify(pipeline);
 
 // Workaround https://github.com/nodejs/node/issues/40191
