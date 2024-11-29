@@ -23,6 +23,7 @@ export class RetryUtility {
 					errorHandlerFn(error);
 				}
 			}
+
 			await new Promise((resolve): void => {
 				setTimeout(resolve, initialDelayInMs);
 			});

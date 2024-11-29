@@ -18,5 +18,6 @@ export let pipelineAsync = promisify(pipeline);
 if (process.version > `v16.13`) {
 	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	const { pipeline } = require(`stream/promises`);
+
 	pipelineAsync = ((streams: AnyStream[]) => pipeline(...streams)) as any;
 }

@@ -131,6 +131,7 @@ export class FileDownloader implements IFileDownloader {
 			downloadsStoragePath,
 			filename,
 		);
+
 		await fs.promises.mkdir(downloadsStoragePath, { recursive: true });
 
 		const timeoutInMs = settings?.timeoutInMs ?? DefaultTimeoutInMs;
@@ -184,16 +185,20 @@ export class FileDownloader implements IFileDownloader {
 			const writeStreamClosePromise = new Promise((resolve) =>
 				writeStream.on(`close`, resolve),
 			);
+
 			await Promise.all([pipelinePromise, writeStreamClosePromise]);
 
 			if (shouldUnzip) {
 				const unzipDownloadedFileAsyncFn = async (): Promise<void> => {
 					await fs.promises.access(tempZipFileDownloadPath);
+
 					await extractZip(tempZipFileDownloadPath, {
 						dir: tempFileDownloadPath,
 					});
+
 					await rimrafAsync(tempZipFileDownloadPath);
 				};
+
 				await RetryUtility.exponentialRetryAsync(
 					unzipDownloadedFileAsyncFn,
 					unzipDownloadedFileAsyncFn.name,
@@ -205,6 +210,7 @@ export class FileDownloader implements IFileDownloader {
 			// Set progress to 100%
 			if (onDownloadProgressChange != null) {
 				clearInterval(progressTimerId);
+
 				onDownloadProgressChange(100, 100);
 			}
 		} catch (error) {
@@ -217,9 +223,11 @@ export class FileDownloader implements IFileDownloader {
 					`${error}. Technical details: ${JSON.stringify(error)}`,
 				);
 			}
+
 			if (progressTimerId != null) {
 				clearInterval(progressTimerId);
 			}
+
 			throw error;
 		}
 
@@ -242,6 +250,7 @@ export class FileDownloader implements IFileDownloader {
 					`File cannot be made executable: ${tempFileDownloadPath}. Technical details: ${JSON.stringify(error)}`,
 				);
 			}
+
 			throw error;
 		}
 
@@ -271,6 +280,7 @@ export class FileDownloader implements IFileDownloader {
 					`Failed during post download operation with error: ${error.message}. Technical details: ${JSON.stringify(error)}`,
 				);
 			}
+
 			throw error;
 		}
 	}

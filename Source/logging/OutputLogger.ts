@@ -10,6 +10,7 @@ export default class OutputLogger implements ILogger {
 
 	public constructor(extensionName: string, context: ExtensionContext) {
 		this._outputChannel = window.createOutputChannel(extensionName);
+
 		context.subscriptions.push(this._outputChannel);
 	}
 

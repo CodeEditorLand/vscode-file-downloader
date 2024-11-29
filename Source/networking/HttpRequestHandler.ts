@@ -71,9 +71,11 @@ export default class HttpRequestHandler implements IHttpRequestHandler {
 			const cancelToken = axios.CancelToken;
 
 			const cancelTokenSource = cancelToken.source();
+
 			cancellationToken.onCancellationRequested(() =>
 				cancelTokenSource.cancel(),
 			);
+
 			options.cancelToken = cancelTokenSource.token;
 		}
 
@@ -93,6 +95,7 @@ export default class HttpRequestHandler implements IHttpRequestHandler {
 					`${error.message}. Technical details: ${JSON.stringify(error)}`,
 				);
 			}
+
 			throw error;
 		}
 
