@@ -17,15 +17,15 @@
 		"axios": "1.7.9",
 		"extract-zip": "2.0.1",
 		"rimraf": "6.0.1",
-		"uuid": "11.0.4"
+		"uuid": "11.0.5"
 	},
 	"devDependencies": {
 		"@types/glob": "8.1.0",
-		"@types/node": "22.10.5",
+		"@types/node": "22.10.6",
 		"@types/rimraf": "4.0.5",
 		"@types/unzipper": "0.10.10",
 		"@types/uuid": "10.0.0",
-		"glob": "11.0.0",
-		"ts-loader": "9.5.1"
+		"glob": "11.0.1",
+		"ts-loader": "9.5.2"
 	}
 }
